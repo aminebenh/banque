@@ -1,0 +1,123 @@
+lic_banque_homepage:
+    path:     /
+    defaults: { _controller: LicBanqueBundle:Default:index }
+
+
+
+
+
+
+#les routes pour les mouvements
+
+
+lic_banque_mouvement:
+    path:      /mouvement/{id}
+    defaults:
+        _controller: LicBanqueBundle:Mouvement:view
+    requirements:
+        id: \d+
+
+lic_banque_listeMouvement:
+    path:      /listeMouvement
+    defaults:
+        _controller: LicBanqueBundle:Mouvement:listeMouvement
+
+
+lic_banque_valider:
+    path:      /mouvement/valider/{id}
+    defaults:
+        _controller: LicBanqueBundle:Mouvement:valider
+    requirements:
+        id: \d+
+
+lic_banque_annuler:
+    path:      /mouvement/annuler/{id}
+    defaults:
+        _controller: LicBanqueBundle:Mouvement:annuler
+    requirements:
+        id: \d+
+
+
+
+
+
+#les routes pour les Membres
+
+lic_banque_profil:
+    path:      /profil
+    defaults:
+        _controller: LicBanqueBundle:Membre:profil
+
+
+
+lic_banque_modifierProfil:
+    path:      /profil/modifier
+    defaults:
+        _controller: LicBanqueBundle:Membre:editProfil
+
+
+
+
+
+
+
+#les routes pour les comptes
+
+
+lic_banque_infoCompte:
+    path:      /compte
+    defaults:
+        _controller: LicBanqueBundle:Compte:compte
+
+
+
+lic_banque_modifierCompte:
+    path:      /compte/modifier
+    defaults:
+        _controller: LicBanqueBundle:Compte:modifierCompte
+
+
+
+
+
+
+#les routes pour les droits
+
+
+lic_banque_infoDroit:
+    path:      /droit
+    defaults:
+        _controller: LicBanqueBundle:Droit:index
+
+
+
+lic_banque_accorderDroit:
+    path:      /Droit/accorder
+    defaults:
+        _controller: LicBanqueBundle:Droit:accorder
+
+
+lic_banque_listeDroit:
+    path:      /Droit/liste
+    defaults:
+        _controller: LicBanqueBundle:Droit:liste
+
+
+
+
+#les routes pour les virements
+
+
+lic_banque_virement:
+    path:      /virement/{id}
+    defaults:
+        _controller: LicBanqueBundle:Virement:view
+    requirements:
+        id: \d+
+
+
+
+lic_banque_listeVirement:
+    path:      /virement/liste
+    defaults:
+        _controller: LicBanqueBundle:Virement:liste
