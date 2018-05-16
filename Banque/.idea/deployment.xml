@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="tpweb" autoUploadExternalChanges="true">
+    <serverData>
+      <paths name="tpweb">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/public_html/Banque" local="$PROJECT_DIR$" web="~abenha02/Banque/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/public_html/Banque/var" />
+            <excludedPath path="/public_html/Banque/vendor" />
+            <excludedPath local="true" path="$PROJECT_DIR$/var" />
+            <excludedPath local="true" path="$PROJECT_DIR$/vendor" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

@@ -10,25 +10,27 @@ lic_banque_homepage:
 #les routes pour les mouvements
 
 
+lic_banque_home:
+    path:      /mouvement/{page}
+    defaults:
+        _controller: LicBanqueBundle:Mouvement:index
+        page:        1
+    requirements:
+        page: \d*
+
 lic_banque_mouvement:
-    path:      /mouvement/{id}
+    path:      /mouvement/view/{id}
     defaults:
         _controller: LicBanqueBundle:Mouvement:view
     requirements:
         id: \d+
 
-lic_banque_listeMouvement:
-    path:      /listeMouvement
-    defaults:
-        _controller: LicBanqueBundle:Mouvement:listeMouvement
 
-
-lic_banque_valider:
-    path:      /mouvement/valider/{id}
+lic_banque_ajouter:
+    path:      /mouvement/ajouter
     defaults:
-        _controller: LicBanqueBundle:Mouvement:valider
-    requirements:
-        id: \d+
+        _controller: LicBanqueBundle:Mouvement:addendur
+
 
 lic_banque_annuler:
     path:      /mouvement/annuler/{id}
@@ -36,6 +38,13 @@ lic_banque_annuler:
         _controller: LicBanqueBundle:Mouvement:annuler
     requirements:
         id: \d+
+
+
+
+
+
+
+
 
 
 

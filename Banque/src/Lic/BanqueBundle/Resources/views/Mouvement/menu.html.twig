@@ -1,0 +1,11 @@
+
+
+<ul class="nav nav-pills nav-stacked">
+    {% for mouv in listmouv %}
+        <li>
+            <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
+                {{ mouv.description }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

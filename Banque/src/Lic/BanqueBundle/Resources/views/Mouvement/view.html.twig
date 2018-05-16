@@ -1,12 +1,40 @@
-{# src/OC/PlatformBundle/Resources/view/Advert/view.html.twig #}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Affichage de l'annonce {{ id }}</title>
-</head>
-<body>
-<h1>Hello Annonce n°{{ id }} !</h1>
-<p>Tag éventuel : {{ tag }}</p>
-</body>
-</html>
+
+
+{% extends "/layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    Information du mouvement id : {{ mouv.id }}
+    <ul>
+        <li>montant : {{ mouv.montant }}</li>
+        <li>compte : {{ mouv.compte }}</li>
+        <li>membre : {{ mouv.membre }}</li>
+        <li>repetitif : {{ mouv.repetitif }}</li>
+        <li>description : {{ mouv.description }}</li>
+        <li>rapprochement : {{ mouv.rapprochement }}</li>
+
+        <li>valider : {{ mouv.valider }}</li>
+    </ul>
+
+    {#
+    <ul>
+
+            <li>
+                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
+                    {{ mouv.id }}
+                </a>
+                par {{ mouv.membre }},
+                description {{ mouv.description }},
+                le {{ mouv.date|date('d/m/Y') }}
+            </li>
+
+    </ul>
+
+    #}
+
+{% endblock %}

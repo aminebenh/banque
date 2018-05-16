@@ -1,0 +1,28 @@
+
+
+{% extends "/layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+
+    <ul>
+        {% for mouv in listmouv %}
+            <li>
+                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
+                    {{ mouv.id }}
+                </a>
+                par {{ mouv.membre }},
+                description {{ mouv.description }},
+
+            </li>
+        {% else %}
+            <li>Pas (encore !) de mouvements</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
