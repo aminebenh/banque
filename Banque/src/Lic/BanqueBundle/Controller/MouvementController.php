@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Lic\BanqueBundle\Entity\Film;
 use Lic\BanqueBundle\Entity\Mouvement;
 use Lic\BanqueBundle\Entity\Critique;
+use \Datetime;
+
+
+
 
 class MouvementController extends Controller
 {
@@ -16,6 +20,7 @@ class MouvementController extends Controller
 
 
 
+    // -----------------------------------------------------------------------------------------------------------------
 
     public function indexAction($page)
     {
@@ -32,6 +37,7 @@ class MouvementController extends Controller
     }
 
 
+    // -----------------------------------------------------------------------------------------------------------------
 
     public function viewAction($id)
     {
@@ -39,8 +45,10 @@ class MouvementController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $MouvementRepository = $em->getRepository('LicBanqueBundle:Mouvement');
 
+
         /** @var Mouvement $mouv */
         $Mouv = $MouvementRepository->find($id);
+
         if ($Mouv === null)
             throw new NotFoundHttpException('Le mouvement ' . $id . ' n\'existe pas;');
 
@@ -52,6 +60,7 @@ class MouvementController extends Controller
 
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
 
     public function addendurAction()
 
@@ -61,7 +70,7 @@ class MouvementController extends Controller
 
         $Mouv = new Mouvement();
 
-        //$Mouv->setDateMouvement(2018-05-15);
+        $Mouv->setDateMouvement(new DateTime('2018-05-15'));
 
         $Mouv->setMontant(5000);
 
@@ -90,35 +99,41 @@ class MouvementController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function menuAction($limit)
+    // -----------------------------------------------------------------------------------------------------------------
+    public function modifierendurAction()
     {
 
-        $listmouv = array(
-            array('id' => 2, 'description' => 'Salaire mai'),
-            array('id' => 5, 'description' => 'sfr avril'),
-            array('id' => 9, 'description' => 'Salaire')
-        );
+        $em = $this->getDoctrine()->getEntityManager();
+        $MouvementRepository = $em->getRepository('LicBanqueBundle:Mouvement');
 
-        return $this->render('@LicBanque/Mouvement/menu.html.twig', array(
+        /** @var Mouvement $mouv */
+        $Mouv = $MouvementRepository->find(3);
 
-            'listmouv' => $listmouv
-        ));
+        $Mouv->setDescription ('test modifier');
+        $Mouv->setValider(false);
+        $Mouv->setMontant(3000);
+
+        $em->persist($Mouv);
+        $em->flush();
+
+        return $this->redirectToRoute('lic_banque_mouvement', array('id' => $Mouv->getId() ));
     }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public function effacerendurAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $MouvementRepository = $em->getRepository('LicBanqueBundle:Mouvement');
+
+        $Mouv = $MouvementRepository->find(3);
+
+        $em->remove($Mouv);
+        $em->flush();
+
+        return $this->redirectToRoute('lic_banque_home');
+    }
+
+
 
 
 

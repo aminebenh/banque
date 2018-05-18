@@ -49,10 +49,13 @@ class Mouvement
      */
     private $description;
 
+
+
     /**
-     * @var int
+     * @var Compte
      *
-     * @ORM\Column(name="id_compte", nullable=true , type="integer")
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Compte")
+     * @ORM\JoinColumn(name="id_compte", nullable=false)
      */
     private $compte;
 

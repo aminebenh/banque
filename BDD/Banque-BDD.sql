@@ -1,26 +1,33 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:8889
--- Généré le :  Ven 11 Mai 2018 à 09:27
--- Version du serveur :  5.6.35
--- Version de PHP :  7.0.15
+-- Host: localhost
+-- Generation Time: May 18, 2018 at 03:01 PM
+-- Server version: 5.5.58-0+deb8u1
+-- PHP Version: 5.6.33-0+deb8u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Base de données :  `banque`
+-- Database: `abenha02`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `compte_bancaire`
+-- Table structure for table `compte_bancaire`
 --
 
 CREATE TABLE `compte_bancaire` (
+  `id` int(11) NOT NULL,
   `num_compte` int(11) NOT NULL,
   `solde` float NOT NULL,
   `date_creation_compte` date NOT NULL,
@@ -28,18 +35,18 @@ CREATE TABLE `compte_bancaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `compte_bancaire`
+-- Dumping data for table `compte_bancaire`
 --
 
-INSERT INTO `compte_bancaire` (`num_compte`, `solde`, `date_creation_compte`, `id_membre`) VALUES
-(298438, 300, '2018-05-04', 1),
-(298439, 65, '2018-05-04', 2),
-(298440, 20000, '2018-05-04', 3);
+INSERT INTO `compte_bancaire` (`id`, `num_compte`, `solde`, `date_creation_compte`, `id_membre`) VALUES
+(1, 385467, 300, '2018-05-04', 1),
+(2, 385468, 65, '2018-05-04', 2),
+(3, 385469, 20000, '2018-05-04', 3);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `droit`
+-- Table structure for table `droit`
 --
 
 CREATE TABLE `droit` (
@@ -50,17 +57,17 @@ CREATE TABLE `droit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `droit`
+-- Dumping data for table `droit`
 --
 
 INSERT INTO `droit` (`id`, `id_membre`, `id_compte`, `id_niveau_droit`) VALUES
-(1, 1, 298439, 3),
-(2, 2, 298440, 4);
+(1, 1, 3, 3),
+(2, 2, 3, 4);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `famille`
+-- Table structure for table `famille`
 --
 
 CREATE TABLE `famille` (
@@ -69,7 +76,7 @@ CREATE TABLE `famille` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `famille`
+-- Dumping data for table `famille`
 --
 
 INSERT INTO `famille` (`id`, `nom_famille`) VALUES
@@ -79,7 +86,7 @@ INSERT INTO `famille` (`id`, `nom_famille`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `membre`
+-- Table structure for table `membre`
 --
 
 CREATE TABLE `membre` (
@@ -91,7 +98,7 @@ CREATE TABLE `membre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `membre`
+-- Dumping data for table `membre`
 --
 
 INSERT INTO `membre` (`id`, `nom_membre`, `prenom_membre`, `adresse`, `id_famille`) VALUES
@@ -102,35 +109,34 @@ INSERT INTO `membre` (`id`, `nom_membre`, `prenom_membre`, `adresse`, `id_famill
 -- --------------------------------------------------------
 
 --
--- Structure de la table `mouvement`
+-- Table structure for table `mouvement`
 --
 
 CREATE TABLE `mouvement` (
   `id` int(11) NOT NULL,
   `montant` float NOT NULL,
-  `date_mouvement` date NOT NULL,
+  `date_mouvement` datetime DEFAULT NULL,
   `valider` tinyint(1) NOT NULL,
   `descriptif` text COLLATE utf8_bin,
   `id_compte` int(11) NOT NULL,
   `id_membre` int(11) DEFAULT NULL,
   `id_moyen_paiement` int(11) DEFAULT NULL,
-  `id_repetitif` int(11) DEFAULT NULL
+  `id_repetitif` int(11) DEFAULT NULL,
+  `rapprochement` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `mouvement`
+-- Dumping data for table `mouvement`
 --
 
-INSERT INTO `mouvement` (`id`, `montant`, `date_mouvement`, `valider`, `descriptif`, `id_compte`, `id_membre`, `id_moyen_paiement`, `id_repetitif`) VALUES
-(1, 3000, '2018-05-07', 1, 'Salaire mois mai', 298438, NULL, NULL, NULL),
-(2, 57.39, '2018-05-07', 1, 'AUCHAN', 298438, 1, 1, NULL),
-(3, 15.99, '2018-05-07', 1, 'forfait bouygues , mois mai .', 298438, NULL, NULL, 1),
-(4, 150, '2018-05-08', 0, 'rembourser 150e a maxime .', 298438, 1, 2, NULL);
+INSERT INTO `mouvement` (`id`, `montant`, `date_mouvement`, `valider`, `descriptif`, `id_compte`, `id_membre`, `id_moyen_paiement`, `id_repetitif`, `rapprochement`) VALUES
+(4, 5000, '2018-05-15 00:00:00', 1, 'test', 3, 1, NULL, 1, 1),
+(5, 500, '2018-05-09 00:00:00', 0, 'test', 2, 1, 1, NULL, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `mouvement_crediteur`
+-- Table structure for table `mouvement_crediteur`
 --
 
 CREATE TABLE `mouvement_crediteur` (
@@ -138,17 +144,10 @@ CREATE TABLE `mouvement_crediteur` (
   `id_mouvement` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Contenu de la table `mouvement_crediteur`
---
-
-INSERT INTO `mouvement_crediteur` (`id`, `id_mouvement`) VALUES
-(13853, 1);
-
 -- --------------------------------------------------------
 
 --
--- Structure de la table `mouvement_debiteur`
+-- Table structure for table `mouvement_debiteur`
 --
 
 CREATE TABLE `mouvement_debiteur` (
@@ -156,17 +155,10 @@ CREATE TABLE `mouvement_debiteur` (
   `id_mouvement` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Contenu de la table `mouvement_debiteur`
---
-
-INSERT INTO `mouvement_debiteur` (`id`, `id_mouvement`) VALUES
-(13830, 2);
-
 -- --------------------------------------------------------
 
 --
--- Structure de la table `moyen_paiement`
+-- Table structure for table `moyen_paiement`
 --
 
 CREATE TABLE `moyen_paiement` (
@@ -177,17 +169,17 @@ CREATE TABLE `moyen_paiement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `moyen_paiement`
+-- Dumping data for table `moyen_paiement`
 --
 
 INSERT INTO `moyen_paiement` (`id`, `libelle`, `details`, `id_compte`) VALUES
-(1, 'Carte bancaire', 'numero de la carte ...', 298438),
-(2, 'cheque', 'numero de cheque :', 298438);
+(1, 'Carte bancaire', '**** **** **** 3541', 1),
+(2, 'cheque', '35486', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `niveau_droit`
+-- Table structure for table `niveau_droit`
 --
 
 CREATE TABLE `niveau_droit` (
@@ -198,50 +190,39 @@ CREATE TABLE `niveau_droit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `niveau_droit`
+-- Dumping data for table `niveau_droit`
 --
 
 INSERT INTO `niveau_droit` (`id`, `virement`, `lecture`, `ecriture`) VALUES
-(0, 0, 0, 0),
-(1, 0, 0, 1),
 (2, 0, 1, 0),
 (3, 0, 1, 1),
 (4, 1, 0, 0),
-(5, 1, 0, 1),
 (6, 1, 1, 0),
 (7, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `periodicite`
+-- Table structure for table `periodicite`
 --
 
 CREATE TABLE `periodicite` (
   `id` int(11) NOT NULL,
-  `libelle` varchar(30) COLLATE utf8_bin NOT NULL
+  `nombre` int(11) NOT NULL,
+  `unite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `periodicite`
+-- Dumping data for table `periodicite`
 --
 
-INSERT INTO `periodicite` (`id`, `libelle`) VALUES
-(1, '3 jours'),
-(2, '7 jours'),
-(3, '10 jours'),
-(4, '15 jours'),
-(5, '20 jours'),
-(6, ' 30 jours'),
-(7, '60 jours'),
-(8, '90 jours'),
-(9, '180 jours'),
-(10, '365 jours');
+INSERT INTO `periodicite` (`id`, `nombre`, `unite`) VALUES
+(6, 30, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `repetitif`
+-- Table structure for table `repetitif`
 --
 
 CREATE TABLE `repetitif` (
@@ -253,7 +234,7 @@ CREATE TABLE `repetitif` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `repetitif`
+-- Dumping data for table `repetitif`
 --
 
 INSERT INTO `repetitif` (`id`, `date_debut`, `id_periodocite`, `date_fin`, `date_derniere_validation`) VALUES
@@ -262,35 +243,48 @@ INSERT INTO `repetitif` (`id`, `date_debut`, `id_periodocite`, `date_fin`, `date
 -- --------------------------------------------------------
 
 --
--- Structure de la table `virement`
+-- Table structure for table `unite`
+--
+
+CREATE TABLE `unite` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `unite`
+--
+
+INSERT INTO `unite` (`id`, `libelle`) VALUES
+(1, 'jour'),
+(2, 'semaine'),
+(3, 'mois');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `virement`
 --
 
 CREATE TABLE `virement` (
   `id` int(11) NOT NULL,
-  `id_mouvement` int(11) NOT NULL,
-  `id_compte_crediteur` int(11) NOT NULL
+  `id_mouvement_crediteur` int(11) NOT NULL,
+  `id_mouvement_debiteur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `virement`
---
-
-INSERT INTO `virement` (`id`, `id_mouvement`, `id_compte_crediteur`) VALUES
-(1, 4, 298439);
-
---
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `compte_bancaire`
+-- Indexes for table `compte_bancaire`
 --
 ALTER TABLE `compte_bancaire`
-  ADD PRIMARY KEY (`num_compte`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_compte_membre` (`id_membre`);
 
 --
--- Index pour la table `droit`
+-- Indexes for table `droit`
 --
 ALTER TABLE `droit`
   ADD PRIMARY KEY (`id`),
@@ -299,20 +293,20 @@ ALTER TABLE `droit`
   ADD KEY `fk_droit_niveau` (`id_niveau_droit`);
 
 --
--- Index pour la table `famille`
+-- Indexes for table `famille`
 --
 ALTER TABLE `famille`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `membre`
+-- Indexes for table `membre`
 --
 ALTER TABLE `membre`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_famille_membre` (`id_famille`);
 
 --
--- Index pour la table `mouvement`
+-- Indexes for table `mouvement`
 --
 ALTER TABLE `mouvement`
   ADD PRIMARY KEY (`id`),
@@ -322,122 +316,199 @@ ALTER TABLE `mouvement`
   ADD KEY `fk_repetitif_mouvement` (`id_repetitif`);
 
 --
--- Index pour la table `mouvement_crediteur`
+-- Indexes for table `mouvement_crediteur`
 --
 ALTER TABLE `mouvement_crediteur`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_mouvement_crediteur` (`id_mouvement`);
 
 --
--- Index pour la table `mouvement_debiteur`
+-- Indexes for table `mouvement_debiteur`
 --
 ALTER TABLE `mouvement_debiteur`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_mouvement_debiteur` (`id_mouvement`);
 
 --
--- Index pour la table `moyen_paiement`
+-- Indexes for table `moyen_paiement`
 --
 ALTER TABLE `moyen_paiement`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_compte_paiement` (`id_compte`);
 
 --
--- Index pour la table `niveau_droit`
+-- Indexes for table `niveau_droit`
 --
 ALTER TABLE `niveau_droit`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `periodicite`
+-- Indexes for table `periodicite`
 --
 ALTER TABLE `periodicite`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `unite` (`unite`);
 
 --
--- Index pour la table `repetitif`
+-- Indexes for table `repetitif`
 --
 ALTER TABLE `repetitif`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_periodocite` (`id_periodocite`);
 
 --
--- Index pour la table `virement`
+-- Indexes for table `unite`
+--
+ALTER TABLE `unite`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `virement`
 --
 ALTER TABLE `virement`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_mouvement_virement` (`id_mouvement`),
-  ADD KEY `fk_virement_compte` (`id_compte_crediteur`);
+  ADD KEY `fk_mouvement_virement_crediteur` (`id_mouvement_crediteur`),
+  ADD KEY `fk_mouvement_virement_debiteur` (`id_mouvement_debiteur`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `famille`
+-- AUTO_INCREMENT for table `compte_bancaire`
+--
+ALTER TABLE `compte_bancaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `droit`
+--
+ALTER TABLE `droit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `famille`
 --
 ALTER TABLE `famille`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- Contraintes pour les tables exportées
+-- AUTO_INCREMENT for table `membre`
+--
+ALTER TABLE `membre`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `mouvement`
+--
+ALTER TABLE `mouvement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `mouvement_crediteur`
+--
+ALTER TABLE `mouvement_crediteur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `mouvement_debiteur`
+--
+ALTER TABLE `mouvement_debiteur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `moyen_paiement`
+--
+ALTER TABLE `moyen_paiement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `niveau_droit`
+--
+ALTER TABLE `niveau_droit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `periodicite`
+--
+ALTER TABLE `periodicite`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `repetitif`
+--
+ALTER TABLE `repetitif`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `unite`
+--
+ALTER TABLE `unite`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `virement`
+--
+ALTER TABLE `virement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `compte_bancaire`
+-- Constraints for table `compte_bancaire`
 --
 ALTER TABLE `compte_bancaire`
   ADD CONSTRAINT `fk_compte_membre` FOREIGN KEY (`id_membre`) REFERENCES `membre` (`id`);
 
 --
--- Contraintes pour la table `droit`
+-- Constraints for table `droit`
 --
 ALTER TABLE `droit`
-  ADD CONSTRAINT `fk_droit_compte` FOREIGN KEY (`id_compte`) REFERENCES `compte_bancaire` (`num_compte`),
+  ADD CONSTRAINT `fk_droit-compte` FOREIGN KEY (`id_compte`) REFERENCES `compte_bancaire` (`id`),
   ADD CONSTRAINT `fk_droit_membre` FOREIGN KEY (`id_membre`) REFERENCES `membre` (`id`),
   ADD CONSTRAINT `fk_droit_niveau` FOREIGN KEY (`id_niveau_droit`) REFERENCES `niveau_droit` (`id`);
 
 --
--- Contraintes pour la table `membre`
+-- Constraints for table `membre`
 --
 ALTER TABLE `membre`
   ADD CONSTRAINT `fk_famille_membre` FOREIGN KEY (`id_famille`) REFERENCES `famille` (`id`);
 
 --
--- Contraintes pour la table `mouvement`
+-- Constraints for table `mouvement`
 --
 ALTER TABLE `mouvement`
-  ADD CONSTRAINT `fk_compte_mouvement` FOREIGN KEY (`id_compte`) REFERENCES `compte_bancaire` (`num_compte`),
+  ADD CONSTRAINT `fk_compte_mouvement` FOREIGN KEY (`id_compte`) REFERENCES `compte_bancaire` (`id`),
   ADD CONSTRAINT `fk_membre_mouvement` FOREIGN KEY (`id_membre`) REFERENCES `membre` (`id`),
   ADD CONSTRAINT `fk_paiement_mouvement` FOREIGN KEY (`id_moyen_paiement`) REFERENCES `moyen_paiement` (`id`),
   ADD CONSTRAINT `fk_repetitif_mouvement` FOREIGN KEY (`id_repetitif`) REFERENCES `repetitif` (`id`);
 
 --
--- Contraintes pour la table `mouvement_crediteur`
+-- Constraints for table `mouvement_crediteur`
 --
 ALTER TABLE `mouvement_crediteur`
-  ADD CONSTRAINT `fk_mouvement_crediteur` FOREIGN KEY (`id_mouvement`) REFERENCES `mouvement` (`id`);
+  ADD CONSTRAINT `fk_mouvement_crediteur` FOREIGN KEY (`id_mouvement`) REFERENCES `mouvement` (`id`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `mouvement_debiteur`
+-- Constraints for table `mouvement_debiteur`
 --
 ALTER TABLE `mouvement_debiteur`
-  ADD CONSTRAINT `fk_mouvement_debiteur` FOREIGN KEY (`id_mouvement`) REFERENCES `mouvement` (`id`);
+  ADD CONSTRAINT `fk_mouvement_debiteur` FOREIGN KEY (`id_mouvement`) REFERENCES `mouvement` (`id`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `moyen_paiement`
+-- Constraints for table `moyen_paiement`
 --
 ALTER TABLE `moyen_paiement`
-  ADD CONSTRAINT `fk_compte_paiement` FOREIGN KEY (`id_compte`) REFERENCES `compte_bancaire` (`num_compte`);
+  ADD CONSTRAINT `fk_paiement_compte` FOREIGN KEY (`id`) REFERENCES `compte_bancaire` (`id`);
 
 --
--- Contraintes pour la table `repetitif`
+-- Constraints for table `periodicite`
+--
+ALTER TABLE `periodicite`
+  ADD CONSTRAINT `FK_unite` FOREIGN KEY (`unite`) REFERENCES `unite` (`id`);
+
+--
+-- Constraints for table `repetitif`
 --
 ALTER TABLE `repetitif`
   ADD CONSTRAINT `fk_periodocite` FOREIGN KEY (`id_periodocite`) REFERENCES `periodicite` (`id`);
 
 --
--- Contraintes pour la table `virement`
+-- Constraints for table `virement`
 --
 ALTER TABLE `virement`
-  ADD CONSTRAINT `fk_mouvement_virement` FOREIGN KEY (`id_mouvement`) REFERENCES `mouvement` (`id`),
-  ADD CONSTRAINT `fk_virement_compte` FOREIGN KEY (`id_compte_crediteur`) REFERENCES `compte_bancaire` (`num_compte`);
+  ADD CONSTRAINT `fk_mouvement_virement_debiteur` FOREIGN KEY (`id_mouvement_debiteur`) REFERENCES `mouvement_debiteur` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_mouvement_virement_crediteur` FOREIGN KEY (`id_mouvement_crediteur`) REFERENCES `mouvement_crediteur` (`id`) ON DELETE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

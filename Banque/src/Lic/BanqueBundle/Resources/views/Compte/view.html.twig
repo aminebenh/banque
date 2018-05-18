@@ -1,0 +1,51 @@
+
+{% extends "/layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    Information du compte id : {{ compte.id }}
+    <ul>
+        <li>numero : {{ compte.numeroCompte }}</li>
+        <li>solde : {{ compte.solde }}</li>
+        <li>membre : {{ compte.idMembre }}</li>
+    </ul>
+
+
+    liste des mouvements
+    <ul>
+        {% for mouv in mouvements %}
+            <li>
+
+
+                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
+                    {{ mouv.id }}
+                </a>
+               / membre : {{ mouv.membre }} / description: {{ mouv.description }}
+
+            </li>
+        {% else %}
+            <li>Pas (encore !) de mouvements</li>
+        {% endfor %}
+    </ul>
+
+
+
+    liste des droits
+
+    <ul>
+        {% for droit in droits %}
+            <ul>
+                <li>id : {{ droit.id }}  / membre : {{ droit.idMembre }} / niveau : {{ droit.idNiveauDroit }} </li>
+            </ul>
+
+        {% else %}
+            <li>Pas (encore !) de droit</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

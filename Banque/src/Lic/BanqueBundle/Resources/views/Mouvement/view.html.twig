@@ -1,6 +1,4 @@
 
-
-
 {% extends "/layout.html.twig" %}
 
 {% block title %}
@@ -12,7 +10,7 @@
     Information du mouvement id : {{ mouv.id }}
     <ul>
         <li>montant : {{ mouv.montant }}</li>
-        <li>compte : {{ mouv.compte }}</li>
+        <li>compte : {{ mouv.compte.numeroCompte }}</li>
         <li>membre : {{ mouv.membre }}</li>
         <li>repetitif : {{ mouv.repetitif }}</li>
         <li>description : {{ mouv.description }}</li>
@@ -21,20 +19,5 @@
         <li>valider : {{ mouv.valider }}</li>
     </ul>
 
-    {#
-    <ul>
-
-            <li>
-                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
-                    {{ mouv.id }}
-                </a>
-                par {{ mouv.membre }},
-                description {{ mouv.description }},
-                le {{ mouv.date|date('d/m/Y') }}
-            </li>
-
-    </ul>
-
-    #}
 
 {% endblock %}
