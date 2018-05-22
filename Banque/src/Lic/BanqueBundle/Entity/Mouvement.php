@@ -45,14 +45,14 @@ class Mouvement
     /**
      * @var string
      *
-     * @ORM\Column(name="descriptif", type="text" , options={"default"=0})
+     * @ORM\Column(name="description", type="text" , options={"default"=0})
      */
     private $description;
 
 
 
     /**
-     * @var Compte
+     * @var $compte
      *
      * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Compte")
      * @ORM\JoinColumn(name="id_compte", nullable=false)
@@ -60,23 +60,26 @@ class Mouvement
     private $compte;
 
     /**
-     * @var int
+     * @var $membre
      *
-     * @ORM\Column(name="id_membre", nullable=true , type="integer")
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Membre")
+     * @ORM\JoinColumn(name="id_membre", nullable=false)
      */
     private $membre;
 
     /**
-     * @var int
+     * @var $moyenPaiement
      *
-     * @ORM\Column(name="id_moyen_paiement",nullable=true , type="integer")
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Paiement")
+     * @ORM\JoinColumn(name="id_moyen_paiement", nullable=false)
      */
     private $moyenPaiement;
 
     /**
-     * @var int
+     * @var $repetitif
      *
-     * @ORM\Column(name="id_repetitif", nullable=true , type="integer")
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Repetitif")
+     * @ORM\JoinColumn(name="id_repetitif", nullable=false)
      */
     private $repetitif;
 
@@ -197,7 +200,7 @@ class Mouvement
     /**
      * Set compte
      *
-     * @param integer $compte
+     * @param Compte $compte
      *
      * @return Mouvement
      */
@@ -211,7 +214,7 @@ class Mouvement
     /**
      * Get compte
      *
-     * @return int
+     * @return Compte
      */
     public function getCompte()
     {
@@ -221,7 +224,7 @@ class Mouvement
     /**
      * Set membre
      *
-     * @param integer $membre
+     * @param Membre $membre
      *
      * @return Mouvement
      */
@@ -235,7 +238,7 @@ class Mouvement
     /**
      * Get membre
      *
-     * @return int
+     * @return Membre
      */
     public function getmembre()
     {
@@ -245,7 +248,7 @@ class Mouvement
     /**
      * Set moyenPaiement
      *
-     * @param integer $moyenPaiement
+     * @param Paiement $moyenPaiement
      *
      * @return Mouvement
      */
@@ -259,7 +262,7 @@ class Mouvement
     /**
      * Get moyenPaiement
      *
-     * @return int
+     * @return Paiement
      */
     public function getMoyenPaiement()
     {
@@ -269,7 +272,7 @@ class Mouvement
     /**
      * Set repetitif
      *
-     * @param integer $repetitif
+     * @param Repetitif $repetitif
      *
      * @return Mouvement
      */
@@ -283,7 +286,7 @@ class Mouvement
     /**
      * Get repetitif
      *
-     * @return int
+     * @return Repetitif
      */
     public function getRepetitif()
     {

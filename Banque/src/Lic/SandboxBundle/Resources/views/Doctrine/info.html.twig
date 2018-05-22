@@ -1,0 +1,19 @@
+{% extends "LicSandboxBundle::layout3.html.twig" %}
+
+{% block title %}Doctrine{% endblock %}
+
+{% block titre_principal %}Doctrine info{% endblock %}
+
+{% block vue %}
+    <p>
+        Information du film id : {{ film.id }}
+    <ul>
+        <li>nom : {{ film.nom }}</li>
+        <li>annee : {{ film.annee }}</li>
+        <li>enstock : {{ film.enstock }}</li>
+        <li>prix : {{ film.prix }}</li>
+        <li>quantite : {{ film.quantite }}</li>
+    </ul>
+
+    </p>
+{% endblock %}

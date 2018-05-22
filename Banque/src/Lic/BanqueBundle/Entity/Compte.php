@@ -36,18 +36,25 @@ class Compte
     private $solde;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="date_creation_compte", type="datetime")
+     * @ORM\Column(name="date_creation_compte", type="date")
      */
     private $dateCreationCompte;
 
     /**
-     * @var int
+     * @var $membre
      *
-     * @ORM\Column(name="id_membre", type="integer")
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Membre")
+     * @ORM\JoinColumn(name="id_membre", nullable=false)
      */
-    private $idMembre;
+    private $membre;
+
+
+
+
+
+
 
 
     /**
@@ -111,7 +118,7 @@ class Compte
     /**
      * Set dateCreationCompte
      *
-     * @param \DateTime $dateCreationCompte
+     * @param \Date $dateCreationCompte
      *
      * @return compte
      */
@@ -125,7 +132,7 @@ class Compte
     /**
      * Get dateCreationCompte
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getDateCreationCompte()
     {
@@ -133,27 +140,27 @@ class Compte
     }
 
     /**
-     * Set idMembre
+     * Set membre
      *
-     * @param integer $idMembre
+     * @param Membre $membre
      *
      * @return compte
      */
-    public function setIdMembre($idMembre)
+    public function setMembre($membre)
     {
-        $this->idMembre = $idMembre;
+        $this->membre = $membre;
 
         return $this;
     }
 
     /**
-     * Get idMembre
+     * Get membre
      *
-     * @return int
+     * @return Membre
      */
-    public function getIdMembre()
+    public function getMembre()
     {
-        return $this->idMembre;
+        return $this->membre;
     }
 }
 

@@ -1,0 +1,69 @@
+{% extends "LicSandboxBundle::layout3.html.twig" %}
+
+{% block title %} title: Vue6{% endblock %}
+
+{% block titre_principal %} titre_principal: vue6{% endblock %}
+
+{% block vue %}
+    <p>vue: vue6<br/></p>
+
+    <p>
+        Liste des noms :<br/>
+    <ul>
+        {% for mention in tab.mentions %}
+            <li>{{ mention.nom|upper }}</li>
+        {% endfor %}
+    </ul>
+    </p>
+    <p>
+        Horaire UE :<br/>
+    <ul>
+        {% for ue in tab.ues %}
+            <li>{{ ue.nom ~ " " ~ ue.volume }}h</li>
+        {% endfor %}
+    </ul>
+    </p>
+    <p>
+        Tout le tableau :<br/>
+    <ul>
+        {% for clet, tab2 in tab.mentions %}
+            <li>{{ clet }}</li>
+            <ul>
+                {% for clet2, tab3 in tab2 %}
+                    <li>{{ clet2 }}</li>
+                    <ul>
+                        {% for tab4 in tab3 %}
+                            <li>{{ tab4 }}</li>
+
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+
+    </p>
+    <p>
+        Nombre de mention :
+        {% set i = 0 %}
+        {% for mention in tab.mentions %}
+            {% set i = i+1 %}
+        {% endfor %}
+        {{ i }}
+    </p>
+
+    <p>
+        {{ "mail : %s"|format(mail) }}
+    </p>
+
+    <p>
+        Attribut app :
+    <ul>
+        <li>{{ app.request }}</li>
+        <li>{{ app.environment }}</li>
+        <li>{{ app.debug }}</li>
+        {{ dump(app) }}
+    </ul>
+    </p>
+
+{% endblock %}

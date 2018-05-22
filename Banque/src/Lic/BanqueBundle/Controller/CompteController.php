@@ -25,19 +25,23 @@ class CompteController extends Controller
     public function viewAction()
     {
 
+
+
+
         $em = $this->getDoctrine()->getEntityManager();
 
         $CompteRepository = $em->getRepository('LicBanqueBundle:Compte');
         $MouvementRepository = $em->getRepository('LicBanqueBundle:Mouvement');
         $DroitRepository = $em->getRepository('LicBanqueBundle:Droit');
 
-        /** @var Compte $Compte */
+
         $Compte = $CompteRepository->find(3);
 
-        /** @var Mouvement $Mouvements */
         $Mouvements = $MouvementRepository->findBy(array('compte' => $Compte));
 
-        $Droits = $DroitRepository->findBy(array('idCompte' => $Compte));
+        $Droits = $DroitRepository->findBy(array('compte' => $Compte));
+
+
 
         $args = array(
             'compte' => $Compte,

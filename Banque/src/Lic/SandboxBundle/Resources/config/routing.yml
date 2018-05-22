@@ -1,0 +1,163 @@
+#lic_sandbox_homepage:
+ #   path:     /
+  #  defaults: { _controller: LicSandboxBundle:Default:index }
+
+#
+#Hello
+#
+lic_sandbox_hello_world:
+    path:     /hello-world
+    defaults: { _controller: LicSandboxBundle:Hello:index }
+
+lic_sandbox_hello_world2:
+    path:     /hello-world2
+    defaults: { _controller: LicSandboxBundle:Hello:index2 }
+
+lic_sandbox_hello_world3:
+    path:     /hello-world3
+    defaults: { _controller: LicSandboxBundle:Hello:index3 }
+
+lic_sandbox_hello_world4:
+    path:     /hello-world4
+    defaults:
+        _controller: LicSandboxBundle:Hello:index4
+
+#
+#TestRoute
+#
+lic_sandbox_test_route:
+    path:     /testroute/test1/{year}/{month}/{filename}.{ext}
+    defaults:
+        _controller: LicSandboxBundle:TestRoute:test1
+
+lic_sandbox_test_route2:
+    path:     /testroute/test2/{year}/{month}/{filename}.{ext}
+    defaults:
+        _controller: LicSandboxBundle:TestRoute:test1
+    requirements:
+        year: "[1-9][0-9]*"
+        month:  "(0?[1-9])|(1[0-2])"
+        filename:   "[-a-zA-Z]+"
+        ext:     jpg|jpeg|png|ppm
+
+lic_sandbox_test_route3:
+    path:     /testroute/test3/{year}/{month}/{filename}.{ext}
+    defaults:
+        _controller: LicSandboxBundle:TestRoute:test1
+        ext:    png
+    requirements:
+        year: "[1-9][0-9]*"
+        month:  "(0?[1-9])|(1[0-2])"
+        filename:   "[-a-zA-Z]+"
+        ext:     jpg|jpeg|png|ppm
+
+lic_sandbox_test_route4:
+    path:     /testroute/test4/{year}/{month}/{filename}.{ext}
+    defaults:
+        _controller: LicSandboxBundle:TestRoute:test1
+        ext:    png
+        month:  1
+        filename: picture
+    requirements:
+        year: "[1-9][0-9]*"
+        month:  "(0?[1-9])|(1[0-2])"
+        filename:   "[-a-zA-Z]+"
+        ext:     jpg|jpeg|png|ppm
+
+lic_sandbox_test_route4bis:
+    path:     /testroute/test4/{year}
+    defaults:
+        _controller: LicSandboxBundle:TestRoute:test4b
+
+#
+#Twig
+#
+lic_sandbox_twig_vue1:
+    path:     /twig/vue1
+    defaults:
+        _controller:  LicSandboxBundle:Twig:vue1
+
+lic_sandbox_twig_vue2:
+    path:     /twig/vue2
+    defaults:
+        _controller:  LicSandboxBundle:Twig:vue2
+
+lic_sandbox_twig_vue3:
+    path:     /twig/vue3
+    defaults:
+        _controller:  LicSandboxBundle:Twig:vue3
+
+lic_sandbox_twig_vue4:
+    path:     /twig/vue4
+    defaults:
+        _controller:  LicSandboxBundle:Twig:vue4
+
+lic_sandbox_twig_vue5:
+    path:     /twig/vue5
+    defaults:
+        _controller:  LicSandboxBundle:Twig:vue5
+
+lic_sandbox_twig_vue6:
+    path:     /twig/vue6
+    defaults:
+        _controller:  LicSandboxBundle:Twig:vue6
+
+#
+#Menu
+#
+lic_sandbox_menu_menu:
+    path:     /menu/menu
+    defaults:
+        _controller:  LicSandboxBundle:Menu:menu
+
+#
+#Doctrine
+#
+lic_sandbox_doctrine_list:
+    path:     /doctrine/list
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:list
+
+lic_sandbox_doctrine_view:
+    path:     /doctrine/view/{id}
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:view
+
+    requirements:
+        id: "[1-9][0-9]*"
+
+lic_sandbox_doctrine_addendur:
+    path:     /doctrine/addendur
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:addendur
+
+lic_sandbox_doctrine_modifieendur:
+    path:     /doctrine/modifieendur
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:modifieendur
+
+lic_sandbox_doctrine_effaceendur:
+    path:     /doctrine/effaceendur
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:effaceendur
+
+lic_sandbox_doctrine_info_id:
+    path:     /doctrine/info/{id}
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:info
+
+    requirements:
+        id: "[1-9][0-9]*"
+
+lic_sandbox_doctrine_supp_id:
+    path:     /doctrine/supp/{id}
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:supp
+
+    requirements:
+        id: "[1-9][0-9]*"
+
+lic_sandbox_doctrine_addendurbis:
+    path:     /doctrine/addendurbis
+    defaults:
+        _controller:  LicSandboxBundle:Doctrine:addendurbis

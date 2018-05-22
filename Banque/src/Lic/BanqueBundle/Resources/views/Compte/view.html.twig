@@ -7,11 +7,21 @@
 
 {% block body %}
 
+
+    Information du membre id : {{ compte.membre.id }}
+    <ul>
+        <li>nom : {{ compte.membre.nom }}</li>
+        <li>prenom : {{ compte.membre.prenom }}</li>
+        <li>adresse : {{ compte.membre.adresse }}</li>
+        <li>famille : {{ compte.membre.famille.nom }}</li>
+    </ul>
+
+
     Information du compte id : {{ compte.id }}
     <ul>
         <li>numero : {{ compte.numeroCompte }}</li>
         <li>solde : {{ compte.solde }}</li>
-        <li>membre : {{ compte.idMembre }}</li>
+        <li>date de Creation : {{ compte.dateCreationCompte|date("d/m/Y")  }}</li>
     </ul>
 
 
@@ -24,7 +34,7 @@
                 <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
                     {{ mouv.id }}
                 </a>
-               / membre : {{ mouv.membre }} / description: {{ mouv.description }}
+               / membre : {{ mouv.membre.id }} / description: {{ mouv.description }}
 
             </li>
         {% else %}
@@ -39,7 +49,14 @@
     <ul>
         {% for droit in droits %}
             <ul>
-                <li>id : {{ droit.id }}  / membre : {{ droit.idMembre }} / niveau : {{ droit.idNiveauDroit }} </li>
+                <li>id : {{ droit.id }}  /
+                    membre : {{ droit.membre.nom }} {{ droit.membre.prenom }} /
+                    compte : {{ droit.compte.numeroCompte }} /
+                    niveau :
+                        {% if droit.niveauDroit.virement %} virement {% endif %}
+                        {% if droit.niveauDroit.lecture %} lecture {% endif %}
+                        {% if droit.niveauDroit.ecriture %} ecriture {% endif %}
+                </li>
             </ul>
 
         {% else %}

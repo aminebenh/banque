@@ -22,26 +22,28 @@ class Droit
     private $id;
 
     /**
-     * @var int
+     * @var $membre
      *
-     * @ORM\Column(name="id_membre", type="integer")
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Membre")
+     * @ORM\JoinColumn(name="id_membre", nullable=false)
      */
-    private $idMembre;
+    private $membre;
 
     /**
-     * @var $idCompte
+     * @var $compte
      *
      * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Compte")
      * @ORM\JoinColumn(name="id_compte", nullable=false)
      */
-    private $idCompte;
+    private $compte;
 
     /**
-     * @var int
+     * @var $niveauDroit
      *
-     * @ORM\Column(name="id_niveau_droit", type="integer")
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\NiveauDroit")
+     * @ORM\JoinColumn(name="id_niveau_droit", nullable=false)
      */
-    private $idNiveauDroit;
+    private $niveauDroit;
 
 
     /**
@@ -55,75 +57,69 @@ class Droit
     }
 
     /**
-     * Set idMembre
+     * Set membre
      *
-     * @param integer $idMembre
+     * @param Membre $membre
      *
      * @return Droit
      */
-    public function setIdMembre($idMembre)
+    public function setMembre($membre)
     {
-        $this->idMembre = $idMembre;
+        $this->membre = $membre;
 
         return $this;
     }
 
     /**
-     * Get idMembre
+     * Get membre
      *
-     * @return int
+     * @return Membre
      */
-    public function getIdMembre()
+    public function getMembre()
     {
-        return $this->idMembre;
+        return $this->membre;
     }
 
     /**
-     * Set idCompte
+     * @return Compte
+     */
+    public function getCompte()
+    {
+        return $this->compte;
+    }
+
+    /**
+     * @param Compte $compte
+     */
+    public function setCompte($compte)
+    {
+        $this->compte = $compte;
+    }
+
+
+
+    /**
+     * Set niveauDroit
      *
-     * @param integer $idCompte
+     * @param NiveauDroit $niveauDroit
      *
      * @return Droit
      */
-    public function setIdCompte($idCompte)
+    public function setNiveauDroit($niveauDroit)
     {
-        $this->idCompte = $idCompte;
+        $this->niveauDroit = $niveauDroit;
 
         return $this;
     }
 
     /**
-     * Get idCompte
+     * Get niveauDroit
      *
-     * @return int
+     * @return NiveauDroit
      */
-    public function getIdCompte()
+    public function getNiveauDroit()
     {
-        return $this->idCompte;
-    }
-
-    /**
-     * Set idNiveauDroit
-     *
-     * @param integer $idNiveauDroit
-     *
-     * @return Droit
-     */
-    public function setIdNiveauDroit($idNiveauDroit)
-    {
-        $this->idNiveauDroit = $idNiveauDroit;
-
-        return $this;
-    }
-
-    /**
-     * Get idNiveauDroit
-     *
-     * @return int
-     */
-    public function getIdNiveauDroit()
-    {
-        return $this->idNiveauDroit;
+        return $this->niveauDroit;
     }
 }
 

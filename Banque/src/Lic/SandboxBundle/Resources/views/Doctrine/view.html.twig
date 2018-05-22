@@ -1,0 +1,35 @@
+{% extends "LicSandboxBundle::layout3.html.twig" %}
+
+{% block title %}Doctrine{% endblock %}
+
+{% block titre_principal %}Doctrine view{% endblock %}
+
+{% block vue %}
+    <p>
+        Information du film id : {{ film.id }}
+    <ul>
+        <li>nom : {{ film.nom }}</li>
+        <li>annee : {{ film.annee }}</li>
+        <li>enstock : {{ film.enstock }}</li>
+        <li>prix : {{ film.prix }}</li>
+        <li>quantite : {{ film.quantite }}</li>
+    </ul>
+
+    </p>
+
+    <p>
+        critiques :
+    <ul>
+    {% for critique in critiques %}
+        {#<li>id : {{ critique.id }}</li>
+        <li>film : {{ critique.film.nom }}</li>#}
+        <li>note : {{ critique.note }}</li>
+        <li>avis : {{ critique.avis }}</li>
+        </br>
+    {% endfor %}
+    </ul>
+
+    </p>
+
+    {{ dump(critiques) }}
+{% endblock %}

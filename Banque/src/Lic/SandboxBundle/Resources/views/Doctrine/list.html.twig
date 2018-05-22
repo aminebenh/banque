@@ -1,0 +1,24 @@
+{% extends "LicSandboxBundle::layout3.html.twig" %}
+
+{% block title %}Doctrine{% endblock %}
+
+{% block titre_principal %}Doctrine list{% endblock %}
+
+{% block vue %}
+    <p>
+        Liste des films :
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>nom</th>
+        </tr>
+
+        {% for film in films %}
+            <tr>
+                <td>{{ film.id }}</td>
+                <td>{{ film.nom }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    </p>
+{% endblock %}
