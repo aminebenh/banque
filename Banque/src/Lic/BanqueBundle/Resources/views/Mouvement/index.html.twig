@@ -16,7 +16,7 @@
                 <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
                     {{ mouv.id }}
                 </a>
-                par {{ mouv.membre }},
+                par {{ mouv.membre.nom }},
                 description {{ mouv.description }},
 
             </li>

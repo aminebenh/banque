@@ -23,10 +23,18 @@ lic_banque_mouvement:
         id: \d+
 
 
-lic_banque_ajouter:
-    path:      /mouvement/ajouter
+lic_banque_ajouterendur:
+    path:      /mouvement/ajouterendur
     defaults:
         _controller: LicBanqueBundle:Mouvement:addendur
+
+
+lic_banque_mofidier:
+    path:      /mouvement/modifier/{id}
+    defaults:
+        _controller: LicBanqueBundle:Mouvement:modifier
+    requirements:
+        id: \d+
 
 
 lic_banque_annuler:

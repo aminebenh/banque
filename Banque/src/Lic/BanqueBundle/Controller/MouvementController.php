@@ -3,6 +3,7 @@
 namespace Lic\BanqueBundle\Controller;
 
 
+use Lic\BanqueBundle\Form\MouvementType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,7 +11,6 @@ use Lic\BanqueBundle\Entity\Film;
 use Lic\BanqueBundle\Entity\Mouvement;
 use Lic\BanqueBundle\Entity\Critique;
 use \Datetime;
-
 
 
 
@@ -92,6 +92,50 @@ class MouvementController extends Controller
 
 
     return $this->redirectToRoute('lic_banque_mouvement', array('id' => $Mouv->getId() ));
+
+    }
+
+
+    public function modifierAction(Request $request,$id)
+
+    {
+
+        //$mouv = new Mouvement();
+        // $Mouv->setRepetitif(1);
+
+        $mouv=$this->getDoctrine()
+                    ->getEntityManager()
+                    ->getRepository('LicBanqueBundle:Mouvement')
+                    ->find($id);
+
+        $form=$this->createForm(MouvementType::class, $mouv);
+
+
+
+        if ($request->isMethod('POST')) {
+
+            $form->handleRequest($request);
+
+
+            if ($form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($mouv);
+
+
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add('notice', 'mouvement bien enregistré.');
+
+
+                return $this->redirectToRoute('lic_banque_mouvement', array('id' => $mouv->getId()));
+            }
+        }
+
+
+
+        return $this->render('@LicBanque/Mouvement/modifier.html.twig', array('form'=>$form->createView(),));
 
     }
 

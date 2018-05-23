@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 18, 2018 at 03:01 PM
+-- Generation Time: May 23, 2018 at 04:14 PM
 -- Server version: 5.5.58-0+deb8u1
 -- PHP Version: 5.6.33-0+deb8u1
 
@@ -72,14 +72,14 @@ INSERT INTO `droit` (`id`, `id_membre`, `id_compte`, `id_niveau_droit`) VALUES
 
 CREATE TABLE `famille` (
   `id` int(11) NOT NULL,
-  `nom_famille` varchar(30) COLLATE utf8_bin NOT NULL
+  `nom` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `famille`
 --
 
-INSERT INTO `famille` (`id`, `nom_famille`) VALUES
+INSERT INTO `famille` (`id`, `nom`) VALUES
 (1, 'BENHAMMOU'),
 (2, 'LUSAKA');
 
@@ -91,8 +91,8 @@ INSERT INTO `famille` (`id`, `nom_famille`) VALUES
 
 CREATE TABLE `membre` (
   `id` int(11) NOT NULL,
-  `nom_membre` varchar(30) COLLATE utf8_bin NOT NULL,
-  `prenom_membre` varchar(30) COLLATE utf8_bin NOT NULL,
+  `nom` varchar(30) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(30) COLLATE utf8_bin NOT NULL,
   `adresse` text COLLATE utf8_bin NOT NULL,
   `id_famille` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -101,7 +101,7 @@ CREATE TABLE `membre` (
 -- Dumping data for table `membre`
 --
 
-INSERT INTO `membre` (`id`, `nom_membre`, `prenom_membre`, `adresse`, `id_famille`) VALUES
+INSERT INTO `membre` (`id`, `nom`, `prenom`, `adresse`, `id_famille`) VALUES
 (1, 'benhammou', 'amine', '41 rue jules didier', 1),
 (2, 'benhammou', 'marine', '8 , avenue blaise pascal', 1),
 (3, 'lusaka', 'maxime', '8 avenue Blaise pascal ch342', 2);
@@ -117,7 +117,7 @@ CREATE TABLE `mouvement` (
   `montant` float NOT NULL,
   `date_mouvement` datetime DEFAULT NULL,
   `valider` tinyint(1) NOT NULL,
-  `descriptif` text COLLATE utf8_bin,
+  `description` text COLLATE utf8_bin,
   `id_compte` int(11) NOT NULL,
   `id_membre` int(11) DEFAULT NULL,
   `id_moyen_paiement` int(11) DEFAULT NULL,
@@ -129,8 +129,8 @@ CREATE TABLE `mouvement` (
 -- Dumping data for table `mouvement`
 --
 
-INSERT INTO `mouvement` (`id`, `montant`, `date_mouvement`, `valider`, `descriptif`, `id_compte`, `id_membre`, `id_moyen_paiement`, `id_repetitif`, `rapprochement`) VALUES
-(4, 5000, '2018-05-15 00:00:00', 1, 'test', 3, 1, NULL, 1, 1),
+INSERT INTO `mouvement` (`id`, `montant`, `date_mouvement`, `valider`, `description`, `id_compte`, `id_membre`, `id_moyen_paiement`, `id_repetitif`, `rapprochement`) VALUES
+(4, 5001, '2018-05-15 00:00:00', 1, 'test modif', 3, 1, 2, 1, 1),
 (5, 500, '2018-05-09 00:00:00', 0, 'test', 2, 1, 1, NULL, 0);
 
 -- --------------------------------------------------------
@@ -228,7 +228,7 @@ INSERT INTO `periodicite` (`id`, `nombre`, `unite`) VALUES
 CREATE TABLE `repetitif` (
   `id` int(11) NOT NULL,
   `date_debut` date NOT NULL,
-  `id_periodocite` int(11) NOT NULL,
+  `id_periodicite` int(11) NOT NULL,
   `date_fin` date NOT NULL,
   `date_derniere_validation` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -237,7 +237,7 @@ CREATE TABLE `repetitif` (
 -- Dumping data for table `repetitif`
 --
 
-INSERT INTO `repetitif` (`id`, `date_debut`, `id_periodocite`, `date_fin`, `date_derniere_validation`) VALUES
+INSERT INTO `repetitif` (`id`, `date_debut`, `id_periodicite`, `date_fin`, `date_derniere_validation`) VALUES
 (1, '2018-05-07', 6, '2019-05-07', '2018-05-07');
 
 -- --------------------------------------------------------
@@ -354,7 +354,7 @@ ALTER TABLE `periodicite`
 --
 ALTER TABLE `repetitif`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_periodocite` (`id_periodocite`);
+  ADD KEY `fk_periodocite` (`id_periodicite`);
 
 --
 -- Indexes for table `unite`
@@ -495,12 +495,6 @@ ALTER TABLE `moyen_paiement`
 --
 ALTER TABLE `periodicite`
   ADD CONSTRAINT `FK_unite` FOREIGN KEY (`unite`) REFERENCES `unite` (`id`);
-
---
--- Constraints for table `repetitif`
---
-ALTER TABLE `repetitif`
-  ADD CONSTRAINT `fk_periodocite` FOREIGN KEY (`id_periodocite`) REFERENCES `periodicite` (`id`);
 
 --
 -- Constraints for table `virement`
