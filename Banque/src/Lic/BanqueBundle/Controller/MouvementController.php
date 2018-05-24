@@ -96,6 +96,60 @@ class MouvementController extends Controller
     }
 
 
+
+    public function ajouterAction(Request $request)
+
+    {
+
+
+        $compte = $this->getDoctrine()
+            ->getEntityManager()
+            ->getRepository('LicBanqueBundle:Compte')
+            ->find(3);
+
+        $mouv = new Mouvement();
+        $mouv->setCompte($compte);
+        $mouv->setRepetitif(null);
+        $mouv->setmembre(null);
+
+
+
+        $form=$this->createForm(MouvementType::class, $mouv);
+
+
+
+        if ($request->isMethod('POST')) {
+
+            $form->handleRequest($request);
+
+
+            if ($form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($mouv);
+
+
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add('notice', 'mouvement bien enregistré.');
+
+
+                return $this->redirectToRoute('lic_banque_mouvement', array('id' => $mouv->getId()));
+            }
+        }
+
+
+
+        return $this->render('@LicBanque/Mouvement/modifier.html.twig', array('form'=>$form->createView(),));
+
+    }
+
+
+
+
+
+
     public function modifierAction(Request $request,$id)
 
     {

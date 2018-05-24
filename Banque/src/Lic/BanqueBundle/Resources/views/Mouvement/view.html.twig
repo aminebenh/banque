@@ -12,7 +12,7 @@
         <li>montant : {{ mouv.montant }}</li>
         <li>compte : {{ mouv.compte.numeroCompte }}</li>
         <li>membre : {{ mouv.membre.nom }}</li>
-        <li>repetitif : {{ mouv.repetitif.id }}</li>
+    {% if  mouv.repetitif != null %} <li>repetitif : {{ mouv.repetitif.id }}</li> {% endif %}
         <li>description : {{ mouv.description }}</li>
         <li>rapprochement : {{ mouv.rapprochement }}</li>
 
