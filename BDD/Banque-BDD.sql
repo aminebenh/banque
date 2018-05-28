@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 23, 2018 at 04:14 PM
+-- Generation Time: May 28, 2018 at 03:30 PM
 -- Server version: 5.5.58-0+deb8u1
 -- PHP Version: 5.6.33-0+deb8u1
 
@@ -130,8 +130,10 @@ CREATE TABLE `mouvement` (
 --
 
 INSERT INTO `mouvement` (`id`, `montant`, `date_mouvement`, `valider`, `description`, `id_compte`, `id_membre`, `id_moyen_paiement`, `id_repetitif`, `rapprochement`) VALUES
-(4, 5001, '2018-05-15 00:00:00', 1, 'test modif', 3, 1, 2, 1, 1),
-(5, 500, '2018-05-09 00:00:00', 0, 'test', 2, 1, 1, NULL, 0);
+(4, 5001, '2018-05-15 00:00:00', 1, 'rien', 3, 1, 2, 1, 1),
+(5, 500, '2018-05-09 00:00:00', 0, 'test', 2, 1, 1, NULL, 0),
+(6, 30, '2015-01-01 00:00:00', 1, 'test test', 3, 1, 1, NULL, 1),
+(7, 30, '2015-01-01 00:00:00', 1, 'test test', 3, 1, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -263,6 +265,29 @@ INSERT INTO `unite` (`id`, `libelle`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `salt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `salt`, `roles`) VALUES
+(4, 'alexandre', 'alexandre', '', 'a:1:{i:0;s:9:"ROLE_USER";}'),
+(5, 'marine', 'marine', '', 'a:1:{i:0;s:9:"ROLE_USER";}'),
+(6, 'anna', 'anna', '', 'a:1:{i:0;s:9:"ROLE_USER";}');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `virement`
 --
 
@@ -363,6 +388,13 @@ ALTER TABLE `unite`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`);
+
+--
 -- Indexes for table `virement`
 --
 ALTER TABLE `virement`
@@ -398,7 +430,7 @@ ALTER TABLE `membre`
 -- AUTO_INCREMENT for table `mouvement`
 --
 ALTER TABLE `mouvement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `mouvement_crediteur`
 --
@@ -434,6 +466,11 @@ ALTER TABLE `repetitif`
 --
 ALTER TABLE `unite`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `virement`
 --

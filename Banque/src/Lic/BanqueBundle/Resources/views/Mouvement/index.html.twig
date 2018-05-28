@@ -18,11 +18,13 @@
                 </a>
                 par {{ mouv.membre.nom }},
                 description {{ mouv.description }},
+            <a href="{{ path('lic_banque_mofidier',{'id': mouv.id}) }}">modifier</a></li>
 
-            </li>
         {% else %}
             <li>Pas (encore !) de mouvements</li>
         {% endfor %}
     </ul>
+
+
 
 {% endblock %}

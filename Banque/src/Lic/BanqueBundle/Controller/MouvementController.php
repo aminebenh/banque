@@ -11,19 +11,28 @@ use Lic\BanqueBundle\Entity\Film;
 use Lic\BanqueBundle\Entity\Mouvement;
 use Lic\BanqueBundle\Entity\Critique;
 use \Datetime;
-
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class MouvementController extends Controller
 {
 
 
-
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 
     // -----------------------------------------------------------------------------------------------------------------
 
     public function indexAction($page)
     {
+
+    /*    if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+
+            throw new AccessDeniedException('Accès limité aux auteurs.');
+        }
+    */
 
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -37,6 +46,9 @@ class MouvementController extends Controller
     }
 
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     // -----------------------------------------------------------------------------------------------------------------
 
     public function viewAction($id)
@@ -59,6 +71,12 @@ class MouvementController extends Controller
         return $this->render('@LicBanque/Mouvement/view.html.twig', $args);
 
     }
+
+
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -95,7 +113,13 @@ class MouvementController extends Controller
 
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
 
+
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 
     public function ajouterAction(Request $request)
 
@@ -147,15 +171,18 @@ class MouvementController extends Controller
 
 
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
+
+
+    // -----------------------------------------------------------------------------------------------------------------
 
 
 
     public function modifierAction(Request $request,$id)
 
     {
-
-        //$mouv = new Mouvement();
-        // $Mouv->setRepetitif(1);
 
         $mouv=$this->getDoctrine()
                     ->getEntityManager()
@@ -196,6 +223,9 @@ class MouvementController extends Controller
 
 
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 
     // -----------------------------------------------------------------------------------------------------------------
     public function modifierendurAction()
@@ -216,6 +246,13 @@ class MouvementController extends Controller
 
         return $this->redirectToRoute('lic_banque_mouvement', array('id' => $Mouv->getId() ));
     }
+
+
+
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 
     // -----------------------------------------------------------------------------------------------------------------
     public function effacerendurAction()

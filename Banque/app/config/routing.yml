@@ -1,3 +1,4 @@
+
 lic_banque:
     resource: "@LicBanqueBundle/Resources/config/routing.yml"
     prefix:   /
@@ -5,3 +6,18 @@ lic_banque:
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+
+
+#------------------les routes pour l'authentification--------------------
+
+login:
+    path: /login
+    defaults:
+        _controller: LicUserBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

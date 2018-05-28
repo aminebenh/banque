@@ -1,6 +1,6 @@
 lic_banque_homepage:
     path:     /
-    defaults: { _controller: LicBanqueBundle:Default:index }
+    defaults: { _controller: LicBanqueBundle:Compte:view }
 
 
 
@@ -60,6 +60,7 @@ lic_banque_compte:
     path:      /compte
     defaults:
         _controller: LicBanqueBundle:Compte:view
+
 
 
 

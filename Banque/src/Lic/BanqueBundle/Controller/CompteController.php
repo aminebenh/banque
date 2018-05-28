@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Lic\BanqueBundle\Entity\Compte;
 use Lic\BanqueBundle\Entity\Mouvement;
 use Lic\BanqueBundle\Entity\Droit;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 
@@ -19,6 +19,9 @@ class CompteController extends Controller
 
 
 
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
 
     // -----------------------------------------------------------------------------------------------------------------
 

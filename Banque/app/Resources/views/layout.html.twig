@@ -17,6 +17,20 @@
 <body>
 <div class="container">
 
+    {% if is_granted('ROLE_USER') %}
+
+    <a href="{{ path('lic_banque_compte') }}">mon compte</a> &nbsp;
+           <a href="{{ path('lic_banque_ajouter') }}">Ajouter un mouvement</a> &nbsp;
+           <a href="{{ path('lic_banque_home') }}">liste mouvement</a> &nbsp;
+           <a href="{{ path('logout') }}">se deconnecter</a> &nbsp;
+    </br></br>
+
+
+
+
+
+    {% endif %}
+
 
             {% block body %}
             {% endblock %}
