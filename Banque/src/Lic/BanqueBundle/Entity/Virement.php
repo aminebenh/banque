@@ -25,7 +25,7 @@ class Virement
     /**
      * @var $mouvementCrediteur
      *
-     * @ORM\OneToOne(targetEntity="Lic\BanqueBundle\Entity\MouvementCrediteur")
+     * @ORM\OneToOne(targetEntity="Lic\BanqueBundle\Entity\Mouvement")
      * @ORM\JoinColumn(name="id_mouvement_crediteur", nullable=false)
      */
     private $mouvementCrediteur;
@@ -34,7 +34,7 @@ class Virement
     /**
      * @var $mouvementDebiteur
      *
-     * @ORM\OneToOne(targetEntity="Lic\BanqueBundle\Entity\MouvementDebiteur")
+     * @ORM\OneToOne(targetEntity="Lic\BanqueBundle\Entity\Mouvement")
      * @ORM\JoinColumn(name="id_mouvement_debiteur", nullable=false)
      */
     private $mouvementDebiteur;
@@ -51,7 +51,7 @@ class Virement
     }
 
     /**
-     * @return MouvementCrediteur
+     * @return Mouvement
      */
     public function getMouvementCrediteur()
     {
@@ -59,7 +59,7 @@ class Virement
     }
 
     /**
-     * @param MouvementCrediteur $mouvementCrediteur
+     * @param Mouvement $mouvementCrediteur
      * @return Virement
      */
     public function setMouvementCrediteur($mouvementCrediteur)
@@ -69,7 +69,7 @@ class Virement
     }
 
     /**
-     * @return MouvementDebiteur
+     * @return Mouvement
      */
     public function getMouvementDebiteur()
     {
@@ -77,7 +77,7 @@ class Virement
     }
 
     /**
-     * @param MouvementDebiteur $mouvementDebiteur
+     * @param Mouvement $mouvementDebiteur
      * @return Virement
      */
     public function setMouvementDebiteur($mouvementDebiteur)

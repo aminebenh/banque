@@ -52,12 +52,22 @@ class Mouvement
 
 
     /**
-     * @var $compte
+     * @var $compteCrediteur
      *
      * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Compte")
-     * @ORM\JoinColumn(name="id_compte", nullable=false)
+     * @ORM\JoinColumn(name="id_compte_crediteur", nullable=false)
      */
-    private $compte;
+    private $compteCrediteur;
+
+
+    /**
+     * @var $compteDebiteur
+     *
+     * @ORM\ManyToOne(targetEntity="Lic\BanqueBundle\Entity\Compte")
+     * @ORM\JoinColumn(name="id_compte_debiteur", nullable=false)
+     */
+    private $compteDebiteur;
+
 
     /**
      * @var $membre
@@ -197,29 +207,51 @@ class Mouvement
         return $this->description;
     }
 
+
     /**
-     * Set compte
+     * @return Compte
      *
-     * @param Compte $compte
+     */
+    public function getCompteCrediteur()
+    {
+        return $this->compteCrediteur;
+    }
+
+    /**
+     * @param Compte $compteCrediteur
+     *
      *
      * @return Mouvement
      */
-    public function setCompte($compte)
+    public function setCompteCrediteur($compteCrediteur)
     {
-        $this->compte = $compte;
+        $this->compteCrediteur = $compteCrediteur;
 
         return $this;
     }
 
     /**
-     * Get compte
-     *
      * @return Compte
      */
-    public function getCompte()
+    public function getCompteDebiteur()
     {
-        return $this->compte;
+        return $this->compteDebiteur;
     }
+
+    /**
+     * @param Compte $compteDebiteur
+     *
+     * @return Mouvement
+     */
+    public function setCompteDebiteur($compteDebiteur)
+    {
+        $this->compteDebiteur = $compteDebiteur;
+
+        return $this;
+    }
+
+
+
 
     /**
      * Set membre

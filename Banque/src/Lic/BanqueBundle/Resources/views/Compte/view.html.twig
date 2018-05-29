@@ -25,16 +25,37 @@
     </ul>
 
 
-    liste des mouvements
+
+
+    liste des mouvements Debiteurs
     <ul>
-        {% for mouv in mouvements %}
+        {% for mouv in mouvementsDeb %}
             <li>
 
 
                 <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
                     {{ mouv.id }}
                 </a>
-               / membre : {{ mouv.membre.id }} / description: {{ mouv.description }}
+                / membre :  {{ mouv.membre.prenom }}  {{ mouv.membre.nom }} / montant: -{{ mouv.montant }}
+
+            </li>
+        {% else %}
+            <li>Pas (encore !) de mouvements</li>
+        {% endfor %}
+    </ul>
+
+
+
+    liste des mouvements Crediteurs
+    <ul>
+        {% for mouv in mouvementsCre %}
+            <li>
+
+
+                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
+                    {{ mouv.id }}
+                </a>
+                / membre : {{ mouv.membre.prenom }}  {{ mouv.membre.nom }} / montant: +{{ mouv.montant }}
 
             </li>
         {% else %}

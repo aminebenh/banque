@@ -29,6 +29,8 @@ class CompteController extends Controller
     {
 
 
+        $userId = $this->getUser()->getid();
+
 
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -40,7 +42,11 @@ class CompteController extends Controller
 
         $Compte = $CompteRepository->find(3);
 
-        $Mouvements = $MouvementRepository->findBy(array('compte' => $Compte));
+
+
+        $MouvementsDebiteur = $MouvementRepository->findBy(array('compteDebiteur' => $Compte));
+        $MouvementsCrediteur = $MouvementRepository->findBy(array('compteCrediteur' => $Compte));
+
 
         $Droits = $DroitRepository->findBy(array('compte' => $Compte));
 
@@ -48,7 +54,8 @@ class CompteController extends Controller
 
         $args = array(
             'compte' => $Compte,
-            'mouvements'=>$Mouvements,
+           'mouvementsDeb'=>$MouvementsDebiteur,
+            'mouvementsCre'=>$MouvementsCrediteur,
             'droits'=>$Droits
         );
 

@@ -34,6 +34,8 @@ class SecurityController extends Controller
         $em->flush();
         */
 
+
+
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('lic_banque_compte');
         }

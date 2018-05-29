@@ -73,46 +73,6 @@ class MouvementController extends Controller
     }
 
 
-
-    /**
-     * @Security("has_role('ROLE_USER')")
-     */
-
-    // -----------------------------------------------------------------------------------------------------------------
-
-    public function addendurAction()
-
-    {
-
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $Mouv = new Mouvement();
-
-        $Mouv->setDateMouvement(new DateTime('2018-05-15'));
-
-        $Mouv->setMontant(5000);
-
-        $Mouv->setCompte(298438);
-
-        $Mouv->setDescription("test");
-
-        $Mouv->setRepetitif(1);
-
-        $Mouv->setmembre(1);
-
-        $Mouv->setValider(true);
-
-        $Mouv->setRapprochement(true);
-
-        $em->persist($Mouv);
-
-        $em->flush();
-
-
-    return $this->redirectToRoute('lic_banque_mouvement', array('id' => $Mouv->getId() ));
-
-    }
-
     // -----------------------------------------------------------------------------------------------------------------
 
 
@@ -132,7 +92,8 @@ class MouvementController extends Controller
             ->find(3);
 
         $mouv = new Mouvement();
-        $mouv->setCompte($compte);
+        $mouv->setCompteDebiteur($compte);
+        $mouv->setCompteCrediteur($compte);
         $mouv->setRepetitif(null);
         $mouv->setmembre(null);
 
@@ -223,29 +184,6 @@ class MouvementController extends Controller
 
 
 
-    /**
-     * @Security("has_role('ROLE_USER')")
-     */
-
-    // -----------------------------------------------------------------------------------------------------------------
-    public function modifierendurAction()
-    {
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $MouvementRepository = $em->getRepository('LicBanqueBundle:Mouvement');
-
-        /** @var Mouvement $mouv */
-        $Mouv = $MouvementRepository->find(3);
-
-        $Mouv->setDescription ('test modifier');
-        $Mouv->setValider(false);
-        $Mouv->setMontant(3000);
-
-        $em->persist($Mouv);
-        $em->flush();
-
-        return $this->redirectToRoute('lic_banque_mouvement', array('id' => $Mouv->getId() ));
-    }
 
 
 
