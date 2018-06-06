@@ -8,13 +8,6 @@
 {% block body %}
 
 
-    Information du membre id : {{ compte.membre.id }}
-    <ul>
-        <li>nom : {{ compte.membre.nom }}</li>
-        <li>prenom : {{ compte.membre.prenom }}</li>
-        <li>adresse : {{ compte.membre.adresse }}</li>
-        <li>famille : {{ compte.membre.famille.nom }}</li>
-    </ul>
 
 
     Information du compte id : {{ compte.id }}
@@ -22,45 +15,6 @@
         <li>numero : {{ compte.numeroCompte }}</li>
         <li>solde : {{ compte.solde }}</li>
         <li>date de Creation : {{ compte.dateCreationCompte|date("d/m/Y")  }}</li>
-    </ul>
-
-
-
-
-    liste des mouvements Debiteurs
-    <ul>
-        {% for mouv in mouvementsDeb %}
-            <li>
-
-
-                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
-                    {{ mouv.id }}
-                </a>
-                / membre :  {{ mouv.membre.prenom }}  {{ mouv.membre.nom }} / montant: -{{ mouv.montant }}
-
-            </li>
-        {% else %}
-            <li>Pas (encore !) de mouvements</li>
-        {% endfor %}
-    </ul>
-
-
-
-    liste des mouvements Crediteurs
-    <ul>
-        {% for mouv in mouvementsCre %}
-            <li>
-
-
-                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
-                    {{ mouv.id }}
-                </a>
-                / membre : {{ mouv.membre.prenom }}  {{ mouv.membre.nom }} / montant: +{{ mouv.montant }}
-
-            </li>
-        {% else %}
-            <li>Pas (encore !) de mouvements</li>
-        {% endfor %}
     </ul>
 
 

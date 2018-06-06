@@ -63,6 +63,18 @@ lic_banque_compte:
 
 
 
+#------------------les routes pour le membre--------------------
+
+lic_banque_membre:
+    path:      /membre
+    defaults:
+        _controller: LicBanqueBundle:Membre:view
+
+
+lic_banque_famille:
+    path:      /membre/famille
+    defaults:
+        _controller: LicBanqueBundle:Membre:detailsFamille
 
 
 

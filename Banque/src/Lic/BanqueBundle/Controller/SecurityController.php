@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Lic\UserBundle\Controller;
+namespace Lic\BanqueBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ class SecurityController extends Controller
     {
 
         /*
-         $em = $this->getDoctrine()->getEntityManager();
+         {$em = $this->getDoctrine()->getEntityManager();
 
         $listNames = array('Alexandre', 'Marine', 'Anna');
 
@@ -31,7 +31,7 @@ class SecurityController extends Controller
 
         $em->persist($user);
         }
-        $em->flush();
+        $em->flush();}
         */
 
 
@@ -43,7 +43,7 @@ class SecurityController extends Controller
         $authenticationUtils = $this->get('security.authentication_utils');
 
 
-        return $this->render('@LicUser/Security/login.html.twig', array(
+        return $this->render('@LicBanque/Security/login.html.twig', array(
             'last_username' => $authenticationUtils->getLastUsername(),
             'error'         => $authenticationUtils->getLastAuthenticationError(),
         ));

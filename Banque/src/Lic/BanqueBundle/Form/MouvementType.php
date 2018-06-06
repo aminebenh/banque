@@ -26,16 +26,17 @@ class MouvementType extends AbstractType
             ->add('montant'         ,MoneyType::class)
             ->add('dateMouvement'   ,DateType::class)
             ->add('valider'         ,CheckboxType::class, array('required' => false))
-            ->add('rapprochement'         ,CheckboxType::class, array('required' => false))
+            ->add('rapprochement'   ,CheckboxType::class, array('required' => false))
             ->add('description'     ,TextareaType::class)
+
             ->add('moyenPaiement'   ,EntityType::class,array(
                 'class'=>'LicBanqueBundle:Paiement',
                 'choice_label'=> 'libelle'))
-
-            ->add('membre'   ,EntityType::class,array(
-                'class'=>'LicBanqueBundle:Membre',
-                'choice_label'=> 'prenom',
+            ->add('compteCrediteur'   ,EntityType::class,array(
+                'class'=>'LicBanqueBundle:Compte',
+                'choice_label'=> 'numeroCompte',
                 'multiple'=> false,))
+
 
             ->add('save'            ,SubmitType::class)
 

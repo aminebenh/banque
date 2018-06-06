@@ -1,0 +1,27 @@
+
+{% extends "/layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+les membres de la famille :  </br>
+    <ul>
+        {% for compte in comptes %}
+            <li>prenom : {{ compte.membre.prenom }}</li>
+            <li>nom : {{ compte.membre.nom }}</li>
+            <li>numero de compte: {{ compte.numeroCompte }}</li>  </br>
+
+        {% else %}
+            <li>Pas (encore !) de compte</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+
+
+

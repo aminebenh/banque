@@ -27,21 +27,22 @@ class MouvementController extends Controller
 
     public function indexAction($page)
     {
-
-    /*    if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
-
-            throw new AccessDeniedException('Accès limité aux auteurs.');
-        }
-    */
+        $user = $this->getUser();
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        $mouvementRepository = $em->getRepository('LicBanqueBundle:Mouvement');
+        $compteRepository       = $em->getRepository('LicBanqueBundle:Compte');
+        $mouvementRepository    = $em->getRepository('LicBanqueBundle:Mouvement');
 
-        $listmouv = $mouvementRepository->findAll();
+        $compte = $compteRepository->find($user);
+
+
+        $mouvDebiteur   = $mouvementRepository->findBy(array('compteDebiteur' => $compte));
+        $mouvCrediteur  = $mouvementRepository->findBy(array('compteCrediteur' => $compte));
 
         return $this->render('@LicBanque/Mouvement/index.html.twig', array(
-            'listmouv' => $listmouv, 'page'=>$page
+            'mouvDebiteur' => $mouvDebiteur,
+            'mouvCrediteur' => $mouvCrediteur
         ));
     }
 
@@ -55,17 +56,25 @@ class MouvementController extends Controller
     {
 
         $em = $this->getDoctrine()->getEntityManager();
-        $MouvementRepository = $em->getRepository('LicBanqueBundle:Mouvement');
 
 
-        /** @var Mouvement $mouv */
-        $Mouv = $MouvementRepository->find($id);
+        $user = $this->getUser();
 
-        if ($Mouv === null)
+        $compteRepository       = $em->getRepository('LicBanqueBundle:Compte');
+        $mouvementRepository    = $em->getRepository('LicBanqueBundle:Mouvement');
+
+
+        $compte = $compteRepository->find($user);
+
+
+        $mouv = $mouvementRepository->find($id);
+
+        if ($mouv === null && $mouv->getCompte!=$compte)
             throw new NotFoundHttpException('Le mouvement ' . $id . ' n\'existe pas;');
 
         $args = array(
-            'mouv' => $Mouv
+            'mouv' => $mouv,
+
         );
 
         return $this->render('@LicBanque/Mouvement/view.html.twig', $args);
@@ -86,16 +95,22 @@ class MouvementController extends Controller
     {
 
 
+        $user = $this->getUser();
+
+
+
+
         $compte = $this->getDoctrine()
             ->getEntityManager()
             ->getRepository('LicBanqueBundle:Compte')
-            ->find(3);
+            ->find($user->getId());
 
         $mouv = new Mouvement();
+        $mouv->setmembre($user);
         $mouv->setCompteDebiteur($compte);
-        $mouv->setCompteCrediteur($compte);
+        $mouv->setCompteCrediteur(null);
         $mouv->setRepetitif(null);
-        $mouv->setmembre(null);
+
 
 
 

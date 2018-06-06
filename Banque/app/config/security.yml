@@ -2,7 +2,7 @@
 security:
   encoders:
     Symfony\Component\Security\Core\User\User: plaintext
-    Lic\UserBundle\Entity\User: plaintext
+    Lic\BanqueBundle\Entity\Membre: plaintext
 
   role_hierarchy:
     ROLE_ADMIN:       [ROLE_USER]
@@ -12,7 +12,7 @@ security:
   providers:
     amine:
       entity:
-        class:    Lic\UserBundle\Entity\User
+        class:    Lic\BanqueBundle\Entity\Membre
         property: username
 
 

@@ -14,7 +14,7 @@ app:
 login:
     path: /login
     defaults:
-        _controller: LicUserBundle:Security:login
+        _controller: LicBanqueBundle:Security:login
 
 login_check:
     path: /login_check

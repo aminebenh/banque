@@ -28,8 +28,8 @@ class CompteController extends Controller
     public function viewAction()
     {
 
-
         $userId = $this->getUser()->getid();
+
 
 
 
@@ -40,7 +40,7 @@ class CompteController extends Controller
         $DroitRepository = $em->getRepository('LicBanqueBundle:Droit');
 
 
-        $Compte = $CompteRepository->find(3);
+        $Compte = $CompteRepository->find($userId);
 
 
 

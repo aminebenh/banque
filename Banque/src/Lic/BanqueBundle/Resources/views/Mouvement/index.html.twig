@@ -9,16 +9,35 @@
 {% block body %}
 
 
-
+Mouvement Debiteur
     <ul>
-        {% for mouv in listmouv %}
+        {% for mouv in mouvDebiteur %}
             <li>
+                id mouvement :
                 <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
                     {{ mouv.id }}
-                </a>
-                par {{ mouv.membre.nom }},
-                description {{ mouv.description }},
-            <a href="{{ path('lic_banque_mofidier',{'id': mouv.id}) }}">modifier</a></li>
+                </a></br>
+                membre: {{ mouv.membre.prenom }} {{ mouv.membre.nom }}</br>
+                description  :{{ mouv.description }}</br>
+            <a href="{{ path('lic_banque_mofidier',{'id': mouv.id}) }}">modifier</a></li></br>
+
+        {% else %}
+            <li>Pas (encore !) de mouvements</li>
+        {% endfor %}
+    </ul>
+
+
+    Mouvement Crediteur
+    <ul>
+        {% for mouv in mouvCrediteur %}
+            <li>
+                id mouvement :
+                <a href="{{ path('lic_banque_mouvement', {'id': mouv.id}) }}">
+                    {{ mouv.id }}
+                </a></br>
+                membre: {{ mouv.membre.prenom }} {{ mouv.membre.nom }}</br>
+                description  :{{ mouv.description }}</br>
+                <a href="{{ path('lic_banque_mofidier',{'id': mouv.id}) }}">modifier</a></li></br>
 
         {% else %}
             <li>Pas (encore !) de mouvements</li>
